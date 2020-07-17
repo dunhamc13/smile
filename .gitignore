@@ -1,0 +1,14 @@
+#compiled source
+*.exe
+*.o
+*.ex
+*.out
+*.zip
+
+#doxygen
+Doxyfile
+latex
+xml
+html
+
+

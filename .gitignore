@@ -6,7 +6,6 @@
 *.zip
 
 #doxygen
-Doxyfile
 latex
 xml
 html

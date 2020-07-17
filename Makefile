@@ -46,33 +46,33 @@ PT = -lpthread
 
 # Because "make" runs the first rule in the file, make the first rule
 # inclusive of the other rules in your Makefile:
-all : shop.out testShop.out
+all : smile.out testSmile.out
 
 # A rule to make the main executable:
-shop.out : driver.o shop.o
-	$(CC) $(CFLAGS) driver.o shop.o -o $@ $(PT)
+smile.out : driver.o smile.o
+	$(CC) $(CFLAGS) driver.o smile.o -o $@ $(PT)
 
 # A rule to make the main executable:
-driver.o : driver.cpp shop.o
+driver.o : driver.cpp smile.o
 	$(CC) $(CFLAGS) $< -c -o $@
 
 # A rule to compile the main file for use by the tests.
 # Uses a #define macro to replace `main` with `notmain` because
 # a C++ program can only have one `main` function.
 # after $(CFLAGS) -Dmain=notmain
-shop.o : Shop.cpp Shop.h
+smile.o : Smile.cpp Smile.h
 	$(CC) $(CFLAGS) $< -c -o $@
 
 # A rule to compile the test executable
-testShop.out : test_shop.cpp Shop.cpp Shop.h shop.o test.o
-	$(CC) $(CFLAGS) test_shop.cpp shop.o test.o -o $@
+testSmile.out : test_smile.cpp Smile.cpp Smile.h smile.o test.o
+	$(CC) $(CFLAGS) test_smile.cpp smile.o test.o -o $@
 
 # A rule to run your tests:
-test : test_shop.out
+test : test_smile.out
 	./$< -s
 
 # A rule to run your leak tests with valgrind:
-leak : shop.out
+leak : smile.out
 	valgrind --leak-check=full ./$< 3 3
 
 # A rule to compile the "dummy" main for Catch2
@@ -80,7 +80,7 @@ test.o : test.cpp catch.hpp
 	$(CC) $(STD) $< -c -o $@
 
 # A rule to zip the source files
-zip : shop.zip
+zip : smile.zip
 
 # A rule to make the zip file
 convex_mp.zip : $(wildcard *.cpp) $(wildcard *.h) $(wildcard *.hpp) Makefile
